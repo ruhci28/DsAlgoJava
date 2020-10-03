@@ -1,0 +1,4 @@
+So array elements are contiguous in memory and therefore not requiring any metadata. And linked list
+ nodes are non-contiguous in memory thereby requiring metadata in the form of location of the next node.
+ Apart from this difference, we can see that the array could have several unused elements because memory
+  has already been allocated. But the linked list will have only the required no. of data items.
