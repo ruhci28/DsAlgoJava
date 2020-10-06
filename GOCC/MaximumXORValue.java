@@ -10,28 +10,46 @@ import java.util.Scanner;
 public class MaximumXORValue {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int arr[] = new int[5];
-        System.out.println("Enter the elements of the array : ");
-        for(int i =0; i < 5;i++){
-            arr[i] = sc.nextInt();
-        }
-        int x = sc.nextInt();
-        int m = sc.nextInt();
-        int max = arr[0] ^ x;
-        for(int i =0; i < 5 ; i++){
-            if(arr[i] < m) {
-                int temp = arr[i] ^ x;
-                if(temp > max){
-                    max = temp;
-                }
-            }else{
-                continue;
+        System.out.println("Enter the number of test cases : ");
+        int T = sc.nextInt();
+        for(int i = 0; i < T; i++ ) {
+            System.out.println("Enter the no. of elements in the arrays : ");
+            int N = sc.nextInt();
+            int arr[] = new int[N];
+            System.out.println("Enter the elements of the array : ");
+            for(int j =0; j < N; j++){
+                arr[j] = sc.nextInt();
             }
+            System.out.println("Enter the number of queries : ");
+            int q = sc.nextInt();
+            for(int k = 0; k < q; q++) {
+                int x = sc.nextInt();
+                int m = sc.nextInt();
+                boolean test = true;
+                int max = -2147483648;
+                for(int l = 0; l < N; l++) {
+                    if(arr[l] < m){
+                        int temp = arr[l] ^ x;
+                        if(temp > max){
+                            max = temp;
+                        }
+                        test = false;
+                    }else{
+                        continue;
+                    }
+                }
+                for(int t = 0; t < N;t++){
+                    System.out.println("..."+(arr[t]^x));
+                }
+                if(!test){
+                    System.out.println(max);
+                }else{
+                    System.out.println("-1");
+                }
+
+            }
+
         }
-        for(int i =0; i < 5; i++){
-            System.out.println(arr[i]^x);
-        }
-        System.out.println("maximum xor value is : "+max);
     }
 
 }
