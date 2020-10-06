@@ -9,7 +9,6 @@ public class IntroToShiftOperator {
         System.out.println(a+"<<2 = "+ (a<<2));
         System.out.println(b+">>1 = "+ (b>>1));
         System.out.println(b+">>>2 = "+ (b>>>2));
-
     }
 }
 //   Note: Unsigned Left shift operator (<<<) –
