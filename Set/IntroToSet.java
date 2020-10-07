@@ -26,6 +26,6 @@ public class IntroToSet {
         Set<Integer> difference = new HashSet<Integer>(set1);
         difference.removeAll(set2);
         System.out.println("Difference of two set : "+difference);
-        
+
     }
 }

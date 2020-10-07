@@ -1,5 +1,6 @@
 package GOCC;
-
+import java.util.*;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class DivisibilityCount {
@@ -18,14 +19,21 @@ public class DivisibilityCount {
             for(int j = 0; j < N; j++) {
                 largestNumber = largestNumber*10 +9;
             }
-            int count = 0;
             int k = 1;
-            while((x*k < largestNumber) && (y*k < largestNumber)) {
-                if((x*k) == (y*k))
-                    count++;
+            Set<Integer> set1 = new HashSet<Integer>();
+            Set<Integer> set2 = new HashSet<Integer>();
+            while(x*k < largestNumber) {
+                set1.add(x*k);
                 k++;
             }
-            System.out.println("Divisibility count is : "+ count);
+            k = 1;
+            while(y*k < largestNumber){
+                set2.add(y*k);
+                k++;
+            }
+            Set<Integer> intersection = new HashSet<Integer>(set1);
+            intersection.retainAll(set2);
+            System.out.println("Divisibility count is : "+ intersection.size());
         }
     }
 }
