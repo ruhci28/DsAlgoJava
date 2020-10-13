@@ -3,7 +3,7 @@ package CircularLinkedLIst;
 import LinkedList.MyLinkedList;
 
 public class MyCircularLinkedList<E> {
-    Node last;
+    Node last,head1,head2;
     public void add(E data){
         Node toAdd = new Node(data);
         if(last == null) {
@@ -41,6 +41,21 @@ public class MyCircularLinkedList<E> {
             }
             toAdd.next = temp.next;
             temp.next = toAdd;
+    }
+    public void splitList(){
+        
+    }
+    public int length() {
+        Node temp = last.next;
+        int count = 0;
+        if(last != null){
+            do{
+                count++;
+                temp = temp.next;
+            }
+            while(temp != last.next);
+        }
+        return count;
     }
     public void print() {
         Node temp = last.next;

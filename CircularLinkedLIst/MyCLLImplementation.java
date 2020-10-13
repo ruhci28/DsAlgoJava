@@ -9,6 +9,7 @@ public class MyCLLImplementation {
         mcll.insertAtEnd(6);
         mcll.insertionBtwNode(8,3);
         mcll.insertAtEnd(12);
+        System.out.println(mcll.length());
         mcll.print();
 
     }
