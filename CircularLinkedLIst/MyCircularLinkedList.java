@@ -43,7 +43,7 @@ public class MyCircularLinkedList<E> {
             temp.next = toAdd;
     }
     public void splitList(){
-        
+
     }
     public int length() {
         Node temp = last.next;
