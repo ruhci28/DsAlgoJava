@@ -4,7 +4,7 @@ public class MyLinkedList<E> {
 
      Node head;
 
-    void add (E data){
+    public void add (E data){
         Node toAdd = new Node(data);
 
         if(isEmpty()){
@@ -36,8 +36,34 @@ public class MyLinkedList<E> {
         toAdd.next = givenNode.next;
         givenNode.next = toAdd;
     }
+    public E lastElement() {
+        Node temp = head;
+        while(temp.next != null)
+            temp = temp.next;
+        return (E) temp.data;
+    }
+    public E delete () throws Exception {
+        Node temp = head;
+        if(temp == null){
+            throw new Exception("Cannot remove from empty list");
+        }
+        if(temp.next == null){
+            E toRemove = (E) head.data;
+            head = null;
+            return toRemove;
+        }
+        while(temp.next.next != null){
+            temp = temp.next;
+        }
+
+        E returnValue = (E) temp.next.data;
+
+        temp.next = null;
+        return returnValue;
+
+    }
 //    Given a ‘key’, delete the first occurrence of this key in linked list.
-    void deleteGivenKey(E data) {
+    public void deleteGivenKey(E data) {
         Node temp = head, prev = temp;
         if(temp != null && temp.data == data ){
             head = temp.next;
@@ -172,7 +198,7 @@ public class MyLinkedList<E> {
 //
 //    }
 
-    void print() {
+    public void print() {
         Node temp = head;
         while(temp != null){
             System.out.print(temp.data+" ");
@@ -181,7 +207,7 @@ public class MyLinkedList<E> {
         System.out.println();
     }
 
-    boolean isEmpty(){
+    public boolean isEmpty(){
         return head == null;
     }
     int sizeIterative() {
