@@ -10,8 +10,8 @@ public class MyDLLImplementation {
         dll.addAfterAGivenNode(6,5);
         dll.addBeforeAGivenNode(43,34);
         dll.print();
-
-
+        dll.delete(34);
+        dll.print();
     }
 
 

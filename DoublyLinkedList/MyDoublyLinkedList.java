@@ -56,12 +56,29 @@ public class MyDoublyLinkedList<E> {
          temp.next = toAdd;
          toAdd.prev = temp;
     }
+    void delete(E data) {
+         Node toDelete = new Node(data);
+         Node temp = head;
+         if(temp.data == data){
+             head = head.next;
+             return;
+         }while(temp.next.data != data){
+             temp = temp.next;
+        }
+         Node prevNode;
+         Node AfterNode;
+         prevNode = temp;
+         AfterNode = temp.next.next;
+         prevNode.next = AfterNode;
+         AfterNode.prev = prevNode;
+    }
      void print(){
         Node temp = head;
         while(temp != null){
             System.out.print(temp.data+" ");
             temp = temp.next;
         }
+         System.out.println();
     }
     static class Node<E>{
         E data;
