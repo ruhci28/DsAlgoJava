@@ -65,12 +65,16 @@ public class MyDoublyLinkedList<E> {
          }while(temp.next.data != data){
              temp = temp.next;
         }
-         Node prevNode;
-         Node AfterNode;
-         prevNode = temp;
-         AfterNode = temp.next.next;
-         prevNode.next = AfterNode;
-         AfterNode.prev = prevNode;
+         if(temp.next.next == null){
+             temp.next = null;
+             return;
+         }else{
+             Node prevNode = temp;
+             Node AfterNode = temp.next.next;
+             prevNode.next = AfterNode;
+             AfterNode.prev = prevNode;
+         }
+
     }
      void print(){
         Node temp = head;

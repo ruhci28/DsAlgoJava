@@ -12,6 +12,9 @@ public class MyDLLImplementation {
         dll.print();
         dll.delete(34);
         dll.print();
+//        dll.delete(6);
+//        dll.delete(10);
+//        dll.print();
     }
 
 
