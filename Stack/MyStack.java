@@ -7,14 +7,14 @@ public class MyStack<E> {
     void push(E data) {
      ll.add(data);
     }
-    E pop() throws Exception{
+    public E pop() throws Exception{
         if(ll.isEmpty()){
             throw new Exception("Cannot pop from empty stack");
         }
       E deleted = ll.delete();
       return deleted;
     }
-    E peek() {
+    public E peek() {
        E peeked = ll.lastElement();
        return  peeked;
     }
