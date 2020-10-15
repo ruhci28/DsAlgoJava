@@ -76,6 +76,21 @@ public class MyDoublyLinkedList<E> {
          }
 
     }
+    void reverse(){
+         Node Prev, Next, curr;
+         curr = head;
+         Prev = null;
+         while(curr.next != null){
+             Next = curr.next;
+             curr.prev = Next;
+             curr.next = Prev;
+             Prev = curr;
+             curr = Next;
+         }
+         curr.prev = null;
+         curr.next = Prev;
+         head = curr;
+    }
      void print(){
         Node temp = head;
         while(temp != null){
