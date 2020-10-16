@@ -21,4 +21,7 @@ public class MyStack<E> {
     void print(){
         ll.print();
     }
+    boolean isEmpty(){
+       return ll.isEmpty();
+    }
 }
