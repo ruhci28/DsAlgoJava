@@ -22,6 +22,8 @@ public class BalancedParenthesis {
                 char topElement;
                 switch (ch){
                     case '}':{
+                        if(balancedStack.isEmpty())
+                        return false;
                        topElement = balancedStack.peek();
                        if(topElement == '{'){
                            balancedStack.pop();
@@ -31,6 +33,8 @@ public class BalancedParenthesis {
                        break;
                     }
                     case ']':{
+                        if(balancedStack.isEmpty())
+                            return false;
                         topElement = balancedStack.peek();
                         if(topElement == '['){
                             balancedStack.pop();
@@ -40,6 +44,8 @@ public class BalancedParenthesis {
                         break;
                     }
                     case ')': {
+                        if(balancedStack.isEmpty())
+                            return false;
                         topElement = balancedStack.peek();
                         if (topElement == '(') {
                             balancedStack.pop();
