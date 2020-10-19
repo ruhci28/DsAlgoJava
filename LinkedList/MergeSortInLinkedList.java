@@ -47,7 +47,7 @@ public class MergeSortInLinkedList {
     }
     node getMiddle(node head){
         if(head == null){
-            return head;
+            return null;
         }
         node fast = head, slow = head;
         while(fast.next != null && fast.next.next != null){
