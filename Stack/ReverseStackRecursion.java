@@ -2,15 +2,26 @@ package Stack;
 
 import java.util.Scanner;
 
-public class ReverseStackRecurssion {
-    static void reverseStack(MyStack stack) throws Exception {
-        int n = (int) stack.pop();
-        if (!stack.isEmpty()) {
-            reverseStack(stack);
+// we use recursion in two functions in this program.
+
+public class ReverseStackRecursion {
+    static void insertAtBottom(int n,MyStack stack) throws Exception {
+        if(stack.isEmpty()){
+            stack.push(n);
+            return;
+        }else{
+            int a = (int) stack.pop();
+            insertAtBottom(n,stack);
+            stack.push(a);
         }
-        stack.push(n);
-        stack.print();
-        return;
+
+    }
+    static void reverseStack(MyStack stack) throws Exception {
+        if (!stack.isEmpty()) {
+            int n = (int) stack.pop();
+            reverseStack(stack);
+            insertAtBottom(n,stack);
+        }
     }
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
