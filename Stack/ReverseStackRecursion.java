@@ -14,7 +14,6 @@ public class ReverseStackRecursion {
             insertAtBottom(n,stack);
             stack.push(a);
         }
-
     }
     static void reverseStack(MyStack stack) throws Exception {
         if (!stack.isEmpty()) {
