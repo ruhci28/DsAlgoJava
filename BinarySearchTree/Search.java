@@ -53,6 +53,9 @@ public class Search {
         }
             return searchKey(root.right, key);
     }
+    public static void deletion(Node root, int key){
+
+    }
     public static void main(String[] args) {
         Search tree = new Search();
         tree.root = new Node(8);
