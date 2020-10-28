@@ -105,54 +105,124 @@ public class MyLinkedList<E> {
 
     void swapNode(E data1, E data2) {
         Node temp = head;
-        Node foundNode1 = null, prev1 = null, next1 = null;
-        Node foundNode2 = null, prev2 = null, next2 = null;
+        Node last = null;
+        Node foundNode1 = null, prev1 = null;
+        Node foundNode2 = null, prev2 = null;
         if (head.data == data1 || head.data == data2) {
-            prev1 = head;
+//            System.out.println("vh");
+            prev1 = null;
+            E searchData;
             foundNode1 = head;
-            next1 = foundNode1.next;
-            temp = temp.next;
-            while(temp != null && (temp.data != data1 || temp.data != data2) ){
-                prev2 = temp;
+            if(head.data == data1){
+                searchData = data2;
+            }else {
+                searchData = data1;
+            }
+//            temp = temp.next;
+            while(temp.next.next != null ){
+                if(temp.next.data == searchData){
+                    prev2 = temp;
+                    foundNode2 = temp.next;
+                }
+                temp = temp.next;
+//                System.out.println("inside while");
+            }
+        } else{
+            while(temp.next.next != null){
+//                if(temp.next.data == data1){
+//                    foundNode1 = temp.next;
+//                    prev1 = temp;
+//                }else if(temp.next.data == data2){
+//                    foundNode2 = temp.next;
+//                    prev2 = temp;
+//                }
+                if(temp.next.data == data1 || temp.next.data == data2){
+                    if(foundNode1 == null){
+                        foundNode1 = temp.next;
+                        prev1 = temp;
+                    }else{
+                        foundNode2 = temp.next;
+                        prev2 = temp;
+                    }
+                }
                 temp = temp.next;
             }
-            if(temp == null){
-                return;
-            }
-            foundNode2 = temp;
-            next2 = temp.next;
-            prev2.next = head;
-            head.next = next2;
-            head = foundNode2;
-            head.next = next1;
-            return;
-
         }
-        while(temp != null && temp.data != data1){
-            prev1 = temp;
-            temp = temp.next;
-        }
-        if(temp == null){
-            return;
-        }
-        foundNode1 = temp;
-        next1 = temp.next;
-        temp = head;
-        while(temp != null && temp.data != data2){
+        if(temp.next.data == data1 || temp.next.data == data2){
+            last = temp.next;
+//            if(temp.next.data == data1){
+//                foundNode1 = temp.next;
+//                prev1 = temp;
+//            }else if(temp.next.data == data2){
+//                foundNode2 = temp.next;
+//                prev2 = temp;
+//            }
+            foundNode2 = temp.next;
             prev2 = temp;
-            temp = temp.next;
         }
-        if(temp == null){
+        last = temp.next;
+        if(foundNode1 == null || foundNode2 == null) {
+//            System.out.println('r');
             return;
         }
-        foundNode2 = temp;
-        next2 = temp.next;
-        prev1.next = foundNode2;
-        foundNode2.next = next1;
-        prev2.next = foundNode1;
-        foundNode1.next = next2;
+        if(foundNode1.data == head.data && prev1 == null){
+            Node temp1 = head;
+            head = head.next;
+            temp1.next = head.next;
+            head.next =  temp1;
+            return;
 
+        }
+        if(foundNode1 == prev2)
+        {
+            prev2.next = foundNode2.next;
+            foundNode2.next = prev1.next;
+            prev1.next = foundNode2;
+            return;
 
+        }
+
+        if(foundNode1.data == head.data){
+//            System.out.println('e');
+            Node temp1 = foundNode1;
+            prev2.next = foundNode2.next;
+            foundNode2.next = head.next;
+            head = foundNode2;
+            temp1.next = prev2.next;
+            prev2.next = foundNode1;
+            return;
+        }
+        if(foundNode2.data == last.data){
+//            System.out.println('d');
+//            if(foundNode1.data == last.data){
+//                prev2.next = foundNode2.next;
+//                prev1.next = foundNode2;
+//                foundNode2.next = null;
+//                last.next = prev2.next;
+//                prev2.next = last;
+//            }else {
+                prev1.next = foundNode1.next;
+                prev2.next = foundNode1;
+                foundNode1.next = null;
+                last.next = prev1.next;
+                prev1.next = last;
+
+//            }
+            return;
+        }
+        if(foundNode1 != prev2){
+          prev1.next = foundNode1.next;
+          prev2.next = foundNode2.next;
+          foundNode2.next = prev1.next;
+          prev1.next = foundNode2;
+          foundNode1.next = prev2.next;
+          prev2.next = foundNode1;
+        }else{
+            prev2.next = foundNode2.next;
+            foundNode2.next = prev1.next;
+            prev1.next = foundNode2;
+        }
+        return;
     }
 //    Iterative Method
 //

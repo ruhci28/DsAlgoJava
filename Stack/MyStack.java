@@ -4,7 +4,7 @@ import LinkedList.MyLinkedList;
 
 public class MyStack<E> {
     private MyLinkedList<E> ll = new MyLinkedList<E>();
-    void push(E data) {
+    public void push(E data) {
      ll.add(data);
     }
     public E pop() throws Exception{

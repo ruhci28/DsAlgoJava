@@ -10,7 +10,7 @@ public class SwapNodes {
         mll.add(20);
         mll.add(14);
         mll.print();
-        mll.swapNode(10,20);
+        mll.swapNode(15,10);
         mll.print();
     }
 }

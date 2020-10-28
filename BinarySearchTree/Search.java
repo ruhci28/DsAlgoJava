@@ -1,17 +1,16 @@
 package BinarySearchTree;
-
-import BinaryTree.BinaryTreeIntro;
+import java.util.Stack;
 
 class Node{
     int key;
-    Node left, right;
+    static Node left, right;
     public Node(int key){
         this.key = key;
         right = left = null;
     }
 }
 public class Search {
-    Node root;
+    static Node root;
     Search(int key) {
         root = new Node(key);
     }
@@ -24,7 +23,23 @@ public class Search {
         System.out.print(root.key+ " ");
         inOrder(root.right);
     }
-    public static Node insert(Node root, int key){
+    static void inOrderWithoutRecursion(){
+        if(root == null){
+            return;
+        }
+        Stack<Node> s = new Stack<Node>();
+        Node curr = root;
+        while(curr != null || s.size() > 0){
+            while(curr != null){
+                s.push(curr);
+                curr = curr.left;
+            }
+            curr = s.pop();
+            System.out.println(curr.key);
+            curr = curr.right;
+        }
+    }
+        public static Node insert(Node root, int key){
         /* If the tree is empty, return a new node */
         if (root == null) {
             root = new Node(key);
@@ -56,7 +71,13 @@ public class Search {
     public static void deletion(Node root, int key){
 
     }
-    public static void main(String[] args) {
+    public static Node minimum(Node root){
+       if(root.left == null){
+           return root;
+       }
+       return minimum(root.left);
+    }
+    public static  void main(String[] args) {
         Search tree = new Search();
         tree.root = new Node(8);
         tree.root.left = new Node(3);
@@ -65,18 +86,7 @@ public class Search {
         tree.root.left.right = new Node(4);
         Node res = searchKey(tree.root, 8);
         System.out.println(res.key);
-//        System.out.println(res.left.key);
         inOrder(tree.root);
-        System.out.println();
-        insert(tree.root,5);
-        inOrder(tree.root);
-        System.out.println();
-        insert(tree.root,6);
-        inOrder(tree.root);
-        System.out.println();
-        insert(tree.root,12);
-        inOrder(tree.root);
-
     }
 }
 //    Time Complexity: The worst-case time complexity of search and insert operations is O(h) where h is the height of the Binary Search Tree. In the worst case, we may have to travel from root to the deepest leaf node. The height of a skewed tree may become n and the time complexity of search and insert operation may become O(n).
