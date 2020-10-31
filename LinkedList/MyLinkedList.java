@@ -300,6 +300,32 @@ public class MyLinkedList<E> {
            return 1 +  sizeRecursive(head.next);
         }
     }
+//  METHOD 1
+    public static boolean detectAndRemoveLoop(Node head){
+        if(head == null || head.next == null){
+            return false;
+        }
+        Node slow = head, fast = head;
+        slow = slow.next;
+        fast = fast.next.next;
+        while((fast != slow) && (fast != null) && (fast.next != null)){
+            if(slow == fast) {
+                break;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        if(slow == fast) {
+            slow = head;
+            while(fast.next != slow.next){
+                slow = slow.next;
+                fast = fast.next;
+            }
+            fast.next = null;
+            return true;
+        }
+        return false;
+    }
 
     public static class Node<E> {
         public E data;
