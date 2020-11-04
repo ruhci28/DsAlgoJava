@@ -33,6 +33,29 @@ public class BinaryTreeIntro {
         PostOrder(root.right);
         System.out.print(root.key+" ");
     }
+    static void MorrisTraversal(Node root){
+        if(root == null){
+            return;
+        }
+        Node curr = root;
+        while(curr != null){
+            if(curr.left == null){
+                System.out.print(curr.key+ " ");
+                curr = curr.right;
+            }else{
+                Node temp = curr.left;
+                while(temp.right != null){
+                    temp = temp.right;
+                }
+                Node temp1 = curr;
+
+                curr = curr.left;
+                temp1.left = null;
+                temp.right = temp1;
+
+            }
+        }
+    }
     public static void main(String[] args) {
         BinaryTreeIntro tree = new BinaryTreeIntro();
         tree.root = new Node(1);
