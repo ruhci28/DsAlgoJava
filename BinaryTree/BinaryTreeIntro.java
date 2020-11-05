@@ -56,6 +56,20 @@ public class BinaryTreeIntro {
             }
         }
     }
+    static int height(Node curr){
+        int hie = 1;
+        if(curr == null){
+            return 0;
+        }
+        if(curr.left == null && curr.right == null){
+            return hie;
+        }else{
+            int leftHeight = height(curr.left);
+            int rightHeight = height(curr.right);
+            hie = Math.max(leftHeight,rightHeight);
+        }
+        return hie+1;
+    }
     public static void main(String[] args) {
         BinaryTreeIntro tree = new BinaryTreeIntro();
         tree.root = new Node(1);
@@ -68,6 +82,9 @@ public class BinaryTreeIntro {
         PreOrder(tree.root);
         System.out.println();
         PostOrder(tree.root);
+        System.out.println();
+        System.out.println("height");
+        System.out.println(height(tree.root));
 
     }
 }
