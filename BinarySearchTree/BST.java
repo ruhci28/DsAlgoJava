@@ -40,6 +40,12 @@ public class BST {
             return search(root.right,key);
         }
     }
+    static int minValue(Node root){
+        if(root.left != null){
+           return minValue(root.left);
+        }
+        return root.key;
+    }
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -51,6 +57,7 @@ public class BST {
         Node searchedRoot = search(tree.root,4);
         System.out.println();
         System.out.println(searchedRoot.key);
+        System.out.println(minValue(tree.root));
 
     }
 }
