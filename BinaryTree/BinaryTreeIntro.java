@@ -63,6 +63,42 @@ public class BinaryTreeIntro {
         }
         return hie+1;
     }
+
+    static boolean isBST(Node root) {
+        if (root == null) {
+            return true;
+        }
+        boolean isBSTree = false;
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+        boolean isLeftIsBST = false;
+        boolean isRightIsBST = false;
+        if(root.left == null ){
+            isLeftIsBST = true;
+        }else{
+            if(root.left.key < root.key){
+                isLeftIsBST = isBST(root.left);
+            }
+            else return false;
+        }
+        if(root.right == null){
+            isRightIsBST = true;
+        }else{
+            if(root.right.key > root.key){
+                isRightIsBST = isBST(root.right);
+            }else{
+                return false;
+            }
+
+        }
+        if(isLeftIsBST && isRightIsBST){
+            isBSTree = true;
+        }
+        return isBSTree;
+
+    }
+
     public static void main(String[] args) {
         BinaryTreeIntro tree = new BinaryTreeIntro();
         tree.root = new Node(1);
@@ -78,6 +114,7 @@ public class BinaryTreeIntro {
         System.out.println();
         System.out.println("height");
         System.out.println(height(tree.root));
+        System.out.println(isBST(tree.root));
 
     }
 }

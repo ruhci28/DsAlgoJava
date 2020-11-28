@@ -144,6 +144,40 @@ public class BST {
             delete(toDelete,minValue(toDelete.right));
         }
     }
+    static boolean isBST(Node root) {
+        if (root == null) {
+            return true;
+        }
+        boolean isBSTree = false;
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+        boolean isLeftIsBST = false;
+        boolean isRightIsBST = false;
+        if(root.left == null ){
+            isLeftIsBST = true;
+        }else{
+            if(root.left.key < root.key){
+                isLeftIsBST = isBST(root.left);
+            }
+            else return false;
+        }
+        if(root.right == null){
+            isRightIsBST = true;
+        }else{
+            if(root.right.key > root.key){
+                isRightIsBST = isBST(root.right);
+            }else{
+                return false;
+            }
+
+        }
+        if(isLeftIsBST && isRightIsBST){
+            isBSTree = true;
+        }
+       return isBSTree;
+
+    }
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -160,6 +194,7 @@ public class BST {
         System.out.println("Inorder Predecessor of 4 is "+getPredecessor(tree.root,4));
          delete(tree.root,tree.root.left);
         inOrder(tree.root);
+        System.out.println("is BST "+isBST(tree.root) );
     }
 }
 
