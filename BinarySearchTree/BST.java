@@ -42,11 +42,11 @@ public class BST {
             return search(root.right,key);
         }
     }
-    static int minValue(Node root){
+    static Node minValue(Node root){
         if(root.left != null){
            return minValue(root.left);
         }
-        return root.key;
+        return root;
     }
     static void delete(Node key){
 
@@ -63,7 +63,7 @@ public class BST {
             return -1;
         }
         if(current.right != null){
-            return minValue(current.right);
+            return minValue(current.right).key;
         }
         else {
             Node successor = null;
@@ -102,6 +102,48 @@ public class BST {
         }
 
     }
+    static Node findAncestor(Node root, Node ancestorOf){
+        Node temp = root;
+        while((temp.left.key != ancestorOf.key)&&(temp.right.key != ancestorOf.key)){
+            if(ancestorOf.key < temp.key){
+                temp = temp.left;
+            }else{
+                temp = temp.right;
+            }
+        }
+        return temp;
+    }
+    static void delete(Node root, Node toDelete){
+//        Node curr = search(root,toDelete.key);
+        if(toDelete.left == null && toDelete.right == null){
+            Node ancestor = findAncestor(root,toDelete);
+            if(toDelete.key < ancestor.key){
+                ancestor.left = null;
+            }else{
+                ancestor.right = null;
+            }
+        }else if(toDelete.left == null || toDelete.right == null){
+            Node ancestor = findAncestor(root,toDelete);
+            if(toDelete.key<ancestor.key){
+                if(toDelete.left != null){
+                    ancestor.left = toDelete.left;
+                }else{
+                    ancestor.left = toDelete.right;
+                }
+            }else
+            {
+                if(toDelete.left != null){
+                    ancestor.right = toDelete.left;
+                }else{
+                    ancestor.right = toDelete.right;
+                }
+            }
+        }else{
+            Node min = minValue(toDelete.right);
+            toDelete.key = min.key;
+            delete(toDelete,minValue(toDelete.right));
+        }
+    }
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -113,9 +155,14 @@ public class BST {
         Node searchedRoot = search(tree.root,4);
         System.out.println();
         System.out.println(searchedRoot.key);
-        System.out.println(minValue(tree.root));
+        System.out.println(minValue(tree.root).key);
         System.out.println("InOrder Successor of 4 is "+getSuccessor(tree.root,4));
         System.out.println("Inorder Predecessor of 4 is "+getPredecessor(tree.root,4));
-
+         delete(tree.root,tree.root.left);
+        inOrder(tree.root);
     }
 }
+
+//          6
+//      3       8
+//    1    4
