@@ -190,6 +190,23 @@ public class BST {
             return true;
         else return false;
     }
+
+//    Lowest common ANCESTOR OF TWO NODES
+    static Node lca(Node root, int x , int y){
+       Node temp = root;
+       while(temp != null){
+           if(x < temp.key && y < temp.key){
+               temp = temp.left;
+           }
+           else if(x > temp.key && y > temp.key){
+               temp = temp.right;
+           }
+           else{
+               break;
+           }
+       }
+       return temp;
+    }
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -207,6 +224,10 @@ public class BST {
          delete(tree.root,tree.root.left);
         inOrder(tree.root);
         System.out.println("is BST "+isBST(tree.root) );
+        System.out.println("Lowest Common Ancestor 1 and 4 is ");
+        System.out.println(lca(tree.root,1,4).key);
+        System.out.println("Lowest Common Ancestor 1 and 8 is ");
+        System.out.println(lca(tree.root,1,8).key);
     }
 }
 
