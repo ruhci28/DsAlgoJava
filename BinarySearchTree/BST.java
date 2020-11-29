@@ -207,6 +207,20 @@ public class BST {
        }
        return temp;
     }
+    static int count = 0;
+    static Node KthSmallestElement(Node root, int k){
+        if(root == null) return root;
+        Node left = KthSmallestElement(root.left,k);
+        if(left != null){
+            return left;
+        }
+        count++;
+        if(count == k){
+            return root;
+        }
+        return KthSmallestElement(root.right,k);
+
+    }
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -222,12 +236,14 @@ public class BST {
         System.out.println("InOrder Successor of 4 is "+getSuccessor(tree.root,4));
         System.out.println("Inorder Predecessor of 4 is "+getPredecessor(tree.root,4));
          delete(tree.root,tree.root.left);
+        System.out.println("3 is deleted from BST ");
         inOrder(tree.root);
         System.out.println("is BST "+isBST(tree.root) );
         System.out.println("Lowest Common Ancestor 1 and 4 is ");
         System.out.println(lca(tree.root,1,4).key);
         System.out.println("Lowest Common Ancestor 1 and 8 is ");
         System.out.println(lca(tree.root,1,8).key);
+        System.out.println("3rd Smallest Element in BST is " + (KthSmallestElement(tree.root,3)).key);
     }
 }
 
