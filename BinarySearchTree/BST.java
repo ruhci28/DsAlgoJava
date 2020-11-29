@@ -221,6 +221,35 @@ public class BST {
         return KthSmallestElement(root.right,k);
 
     }
+    static int floor(Node root, int k){
+        if(root == null){
+            return -1;
+        }
+        if(root.key == k){
+            return root.key;
+        }
+        if(k > root.key && root.left == null && root.right == null){
+            return root.key;
+        }
+        if(k < root.key ){
+            return floor(root.left,k);
+        }else{
+           return floor(root.right,k);
+        }
+    }
+    static int ceil(Node root, int k){
+        if (root == null) {
+            return -1;
+        }
+        if(root.key == k){
+            return root.key;
+        }
+        if(k > root.key){
+            return ceil(root.right,k);
+        }
+        int ceil = ceil(root.left, k);
+        return (ceil >= k) ? ceil : root.key;
+    }
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -244,6 +273,7 @@ public class BST {
         System.out.println("Lowest Common Ancestor 1 and 8 is ");
         System.out.println(lca(tree.root,1,8).key);
         System.out.println("3rd Smallest Element in BST is " + (KthSmallestElement(tree.root,3)).key);
+
     }
 }
 
