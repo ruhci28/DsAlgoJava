@@ -223,19 +223,16 @@ public class BST {
     }
     static int floor(Node root, int k){
         if(root == null){
-            return -1;
+            return Integer.MAX_VALUE;
         }
         if(root.key == k){
             return root.key;
         }
-        if(k > root.key && root.left == null && root.right == null){
-            return root.key;
-        }
-        if(k < root.key ){
+        if(k < root.key){
             return floor(root.left,k);
-        }else{
-           return floor(root.right,k);
         }
+        int floor = floor(root.right, k);
+        return (floor <= k) ? floor : root.key;
     }
     static int ceil(Node root, int k){
         if (root == null) {
@@ -250,6 +247,41 @@ public class BST {
         int ceil = ceil(root.left, k);
         return (ceil >= k) ? ceil : root.key;
     }
+    static Node first, middle, last, prev;
+    static void CorrectBSTUtil(Node root){
+        if(root == null){
+            return;
+        }
+        CorrectBSTUtil(root.left);
+        if(prev != null && root.key < prev.key){
+            if(first == null){
+                first = prev;
+                middle = root;
+            }else{
+                last = root;
+            }
+        }
+        prev = root;
+        CorrectBSTUtil(root.right);
+    }
+    static void CorrectBST(Node root){
+        if(root == null){
+            return;
+        }
+        first = middle = last = prev = null;
+        CorrectBSTUtil(root);
+        if(first != null && last != null){
+            int temp = first.key;
+            first.key = last.key;
+            last.key = temp;
+        }else if (first != null && middle != null){
+            int temp = first.key;
+            first.key = middle.key;
+            middle.key = temp;
+        }
+
+    }
+
     public static void main(String[] args){
         BST tree = new BST();
         insert(6);
@@ -273,7 +305,31 @@ public class BST {
         System.out.println("Lowest Common Ancestor 1 and 8 is ");
         System.out.println(lca(tree.root,1,8).key);
         System.out.println("3rd Smallest Element in BST is " + (KthSmallestElement(tree.root,3)).key);
-
+        insert(10);
+        insert(23);
+        insert(5);
+        inOrder(tree.root);
+        System.out.println();
+//        1 4 5 6 8 10 23
+        System.out.println("Floor and Ceil of 7 in given tree is : "+floor(tree.root,7)+" and "+ceil(tree.root,7)+" respectively. ");
+//         Current BST
+//                    6
+//            4              8
+//        1        5              10
+//                                      23
+//        After Swap
+//                    6
+//            4              8
+//        1        5              10
+//                             7         23
+//        7 is added so now the BST in not correct
+        tree.root.right.right.left = new Node(7);
+        System.out.println("After Inserting 7 at wrong place ");
+        inOrder(tree.root);
+        System.out.println();
+        CorrectBST(tree.root);
+        System.out.println("After Correcting the BST ");
+        inOrder(tree.root);
     }
 }
 
