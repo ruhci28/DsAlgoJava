@@ -1,14 +1,14 @@
 package BinaryTree;
 
 public class BinaryTreeIntro {
-    Node root;
+    public Node root;
     BinaryTreeIntro(int key) {
         root = new Node(key);
     }
-    BinaryTreeIntro() {
+    public BinaryTreeIntro() {
         root = null;
     }
-    static void inOrder(Node root){
+    public static void inOrder(Node root){
         if(root == null) return;
         inOrder(root.left);
         System.out.print(root.key+ " ");
