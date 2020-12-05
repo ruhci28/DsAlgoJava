@@ -1,0 +1,17 @@
+Convert a N-ary Tree to a Binary Tree
+There are a lot of solutions to convert a N-ary tree to a binary tree. We only introduce one classical solution.
+
+The strategy follows two rules:
+
+The left child of each node in the binary tree is the next sibling of the node in the N-ary tree.
+The right child of each node in the binary tree is the first child of the node in the N-ary tree.
+Here is an example to help you understand this strategy:
+
+Using this strategy, you can simply convert a N-ary tree to a binary tree recursively. Also, you can easily recover the N-ary tree from the binary tree you converted.
+
+The recursion recovery strategy for each node is:
+
+Deal with its children recursively.
+Add its left child as the next child of its parent if it has a left child.
+Add its right child as the first child of the node itself if it has a right child.
+Here is an example to help you understand this strategy:
