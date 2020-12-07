@@ -31,7 +31,7 @@ public class MyGraph {
         while(!que.isEmpty()){
             s = que.poll();
             System.out.print(s+ " ");
-            Iterator<Integer> i = edgesArray[s].listIterator();
+            Iterator<Integer> i = edgesArray[s].listIterator(); // no of edges connected to that node
             while (i.hasNext()){
                 int n = i.next();
                 if(!visited[n]){
