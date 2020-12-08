@@ -1,13 +1,15 @@
 package Graphs;
 
+import BinaryTree.Node;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class MyGraph {
 
-    int size;
-    LinkedList<Integer>[]  edgesArray;
+    static int size;
+    static LinkedList<Integer>[]  edgesArray;
 
     public MyGraph(int size){
         this.size = size;
@@ -61,6 +63,30 @@ public class MyGraph {
             if (visited[i] == false)
                 DFSUtil(i, visited);
     }
+
+    static boolean detectCycle(int root){
+     boolean[] visited = new boolean[size];
+     boolean iscycle = detectCycleUtil(root,-1,visited);
+     return iscycle;
+    }
+    static boolean detectCycleUtil(int root, int parent, boolean[] visited){
+        visited[root] = true;
+        Iterator<Integer> i = edgesArray[root].listIterator();
+        while(i.hasNext()){
+            int n = i.next();
+            if(!visited[n]){
+                if(detectCycleUtil(n,root,visited) == true){
+                    return true;
+                }
+            }
+            else{
+                if(n != parent){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public void printGraph(){
         for(int i = 0; i < size; i++){
             System.out.println("\nAdjacency list of vertex " + i);
@@ -76,13 +102,20 @@ public class MyGraph {
         MyGraph graph = new MyGraph(6);
         graph.addEdge(1,2);
         graph.addEdge(1,3);
-//        graph.addEdge(4,5);
+        graph.addEdge(4,5);
         graph.addEdge(2,4);
         graph.addEdge(1,0);
+        graph.addEdge(3,2);
         graph.printGraph();
         graph.BFS(1);
         System.out.println();
         graph.DFS(5);
+       if(detectCycle(1)==true){
+           System.out.println("Cycle is present in the graph");
+       }else {
+           System.out.println("No cycle is present in the graph");
+
+       }
 
     }
 }
