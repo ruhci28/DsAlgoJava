@@ -66,8 +66,8 @@ public class MyGraph {
 
     static boolean detectCycle(int root){
      boolean[] visited = new boolean[size];
-     boolean iscycle = detectCycleUtil(root,-1,visited);
-     return iscycle;
+     boolean isCycle = detectCycleUtil(root,-1,visited);
+     return isCycle;
     }
     static boolean detectCycleUtil(int root, int parent, boolean[] visited){
         visited[root] = true;
@@ -79,11 +79,9 @@ public class MyGraph {
                     return true;
                 }
             }
-            else{
-                if(n != parent){
+            else if(n != parent){
                     return true;
                 }
-            }
         }
         return false;
     }
